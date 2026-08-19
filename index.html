@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es-AR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nails by Briseida · Calculadora</title>
+
+  <!-- Meta etiquetas básicas y de SEO -->
+  <meta name="description" content="Calculá tu presupuesto de uñas y descargá tu comprobante de servicio en segundos. ✨">
+  
+  <!-- Estilos e Iconos -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nails by Briseida · Calculadora de Servicios">
+  <meta property="og:description" content="Calculá tu presupuesto de uñas y descargá tu comprobante de servicio en segundos. ✨">
+  <meta property="og:image" content="https://tudominio.netlify.app/img/portada-whatsapp.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://tudominio.netlify.app/">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nails by Briseida · Calculadora de Servicios">
+  <meta name="twitter:description" content="Calculá tu presupuesto de uñas y descargá tu comprobante de servicio en segundos. ✨">
+  <meta name="twitter:image" content="https://tudominio.netlify.app/img/portada-whatsapp.jpg">
+</head>
+ <body class="app-shell bg-[#fcf8fa]">
+  <div class="petal petal-a"></div>
+  <div class="petal petal-b"></div>
+  <div class="petal petal-c"></div>
+
+  <header class="w-full relative z-10">
+   <div class="max-w-7xl mx-auto px-4 sm:px-7 pt-7 sm:pt-10">
+    <div class="rounded-[2rem] bg-white border border-white p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 calculator-card">
+     <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+      <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl border-2 border-[#f2dce4] p-1 flex-shrink-0 bg-white shadow-sm flex items-center justify-center overflow-hidden">
+        <img src="img/NAILS (1).png" alt="Logo Nails by Briseida" class="w-full h-full object-cover rounded-xl" onerror="this.remove();">
+      </div>
+      <div>
+       <p class="uppercase tracking-[0.24em] font-semibold text-[#a9466c] text-xs">Presupuesto Rápido</p>
+       <h1 class="display-font font-bold text-3xl text-[#442a35] mt-0.5">Nails by Briseida</h1>
+       <p class="text-sm text-[#764054] mt-0.5">Calculadora oficial de servicios y diseños</p>
+      </div>
+     </div>
+     <button id="edit-prices-button" type="button" class="bg-[#fde6ee] text-[#a9466c] inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition hover:bg-[#f8d0de] flex-shrink-0">
+      <i data-lucide="pencil-line" class="w-4 h-4"></i>
+      <span>Editar servicios</span>
+     </button>
+    </div>
+   </div>
+  </header>
+
+  <main class="w-full relative z-10 max-w-7xl mx-auto px-4 sm:px-7 py-7 sm:py-10">
+   <div class="grid xl:grid-cols-[minmax(0,1.55fr)_minmax(330px,.8fr)] gap-7 items-start">
+    <section aria-labelledby="services-heading" class="fade-up">
+     <div class="bg-white rounded-[2rem] border border-white calculator-card p-5 sm:p-8">
+      <div class="flex items-end justify-between gap-4 mb-6">
+       <div>
+        <p class="uppercase tracking-[.18em] font-bold text-xs text-[#a9466c]">Paso 1</p>
+        <h2 id="services-heading" class="display-font font-bold text-2xl text-[#442a35] mt-1">Servicios Principales</h2>
+       </div>
+       <i data-lucide="sparkles" class="w-6 h-6 text-[#d96f98]" aria-hidden="true"></i>
+      </div>
+      <fieldset>
+       <legend class="sr-only">Selecciona un servicio</legend>
+       <div id="service-grid" class="grid sm:grid-cols-2 gap-3"></div>
+       <div class="flex items-end justify-between gap-4 mt-8 mb-4">
+        <h3 class="display-font font-bold text-xl text-[#442a35]">Retiros</h3>
+       </div>
+       <div id="withdrawal-grid" class="grid sm:grid-cols-2 gap-3"></div>
+      </fieldset>
+
+      <div class="flex items-end justify-between gap-4 mt-10 mb-4">
+       <div>
+        <p class="uppercase tracking-[.18em] font-bold text-xs text-[#a9466c]">Paso 2</p>
+        <h2 class="display-font font-bold text-2xl text-[#442a35] mt-1">Decoraciones y Nail Art</h2>
+       </div>
+       <button id="edit-decorations-button" type="button" class="bg-[#fde6ee] text-[#a9466c] hover:bg-[#f6cddd] inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition">
+        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+        <span>Editar decoraciones</span>
+       </button>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-[#f5dde6]">
+       <table class="w-full min-w-[560px] text-left">
+        <thead class="bg-[#fff4f7] text-[#764054]">
+         <tr>
+          <th class="px-5 py-4 font-semibold">Precio unitario</th>
+          <th class="px-5 py-4 font-semibold">Técnica</th>
+          <th class="px-5 py-4 font-semibold text-center">Cantidad de uñas</th>
+         </tr>
+        </thead>
+        <tbody id="decoration-list"></tbody>
+       </table>
+      </div>
+     </div>
+    </section>
+    
+    <aside aria-labelledby="invoice-heading" class="xl:sticky xl:top-5 fade-up" style="animation-delay:.12s">
+     <section class="bg-white rounded-[2rem] p-6 sm:p-7 calculator-card border border-white">
+      <div class="flex items-center justify-between mb-6">
+       <div>
+        <p class="uppercase tracking-[.18em] font-bold text-xs text-[#a9466c]">Resumen</p>
+        <h2 id="invoice-heading" class="display-font font-bold text-2xl text-[#442a35] mt-1">Detalle del Trabajo</h2>
+       </div>
+       <div class="w-10 h-10 rounded-full bg-[#fde6ee] flex items-center justify-center">
+        <i data-lucide="receipt-text" class="w-5 h-5 text-[#a9466c]" aria-hidden="true"></i>
+       </div>
+      </div>
+      <div class="rounded-2xl bg-[#fff8fa] p-4 border border-[#f5dde6]">
+       <div class="flex justify-between gap-4 text-sm pb-3 border-b border-[#f0d7e0]">
+        <span class="font-medium text-[#764054]">Servicio principal:</span>
+        <strong id="summary-service-price" class="text-[#a9466c]" aria-live="polite">$0</strong>
+       </div>
+       <div id="summary-service-name" class="pt-3 text-sm font-semibold text-[#55313f]" aria-live="polite">Elegí un servicio para comenzar</div>
+       <div id="extras-summary" class="space-y-2 mt-4 text-sm"></div>
+       <div id="no-extras-message" class="text-sm italic text-[#986277] mt-4">Sin adicionales seleccionados</div>
+      </div>
+      <div class="mt-5 pt-5 border-t border-[#dca9ba]">
+       <div class="flex items-end justify-between gap-4">
+        <span class="display-font font-semibold text-[#442a35] text-lg">TOTAL:</span>
+        <strong id="grand-total" class="text-3xl font-bold text-[#a9466c]" aria-live="polite">$0</strong>
+       </div>
+      </div>
+      
+      <button id="view-invoice-button" type="button" class="w-full mt-6 bg-[#a9466c] text-white rounded-full px-5 py-3.5 font-semibold flex items-center justify-center gap-2 hover:bg-[#8f365a] transition shadow-md">
+       <i data-lucide="file-text" class="w-4 h-4"></i>
+       <span>Ver Comprobante</span>
+      </button>
+      <button id="reset-button" type="button" class="w-full mt-3 bg-[#fde6ee] text-[#a9466c] rounded-full px-5 py-3 font-semibold flex items-center justify-center gap-2 transition hover:bg-[#f6cddd]">
+       <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+       <span>Reiniciar calculadora</span>
+      </button>
+      <p id="status-message" class="text-center text-sm font-medium min-h-5 mt-4" role="status" aria-live="polite"></p>
+     </section>
+    </aside>
+   </div>
+  </main>
+
+  <div id="price-modal" class="hidden fixed inset-0 z-50 modal-backdrop p-4 items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="price-modal-title">
+   <div class="modal-card w-full max-w-2xl bg-[#fffafd] rounded-[2rem] shadow-2xl overflow-auto">
+    <form id="price-form" class="p-6 sm:p-8">
+     <div class="flex items-start justify-between gap-5">
+      <div>
+       <p class="uppercase tracking-[.18em] font-bold text-xs text-[#a9466c]">Ajustes</p>
+       <h2 id="price-modal-title" class="display-font font-bold text-2xl text-[#442a35] mt-1">Editar elementos</h2>
+       <p id="price-modal-description" class="text-sm text-[#764054] mt-2">Cambiá los nombres o precios según tus tarifas:</p>
+      </div>
+      <button id="close-modal-button" type="button" aria-label="Cerrar" class="rounded-full p-2 hover:bg-[#fde9f0] text-[#a9466c]">
+       <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+     </div>
+     <div id="price-inputs" class="grid sm:grid-cols-2 gap-4 mt-7"></div>
+     <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 mt-8">
+      <button id="cancel-prices-button" type="button" class="bg-[#fde6ee] text-[#a9466c] rounded-full px-5 py-3 font-semibold hover:bg-[#f6cddd]">Cancelar</button>
+      <button type="submit" class="bg-[#a9466c] text-white rounded-full px-5 py-3 font-semibold hover:bg-[#8f365a] transition">Guardar cambios</button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <div id="invoice-modal" class="hidden fixed inset-0 z-50 modal-backdrop p-4 items-center justify-center overflow-y-auto">
+   <div class="modal-card w-full max-w-lg bg-white rounded-[2rem] shadow-2xl overflow-hidden my-8">
+    <div class="p-6 border-b border-[#f2dce4] flex items-center justify-between bg-[#fffafd]">
+     <div class="flex items-center gap-2">
+      <i data-lucide="receipt" class="w-5 h-5 text-[#a9466c]"></i>
+      <h3 class="display-font font-bold text-lg text-[#442a35]">Vista Previa del Comprobante</h3>
+     </div>
+     <button id="close-invoice-x" type="button" class="rounded-full p-2 hover:bg-[#fde9f0] text-[#a9466c]">
+      <i data-lucide="x" class="w-5 h-5"></i>
+     </button>
+    </div>
+
+    <div class="p-6 bg-white overflow-y-auto max-h-[60vh]">
+     <div id="invoice-card-content" class="bg-[#fffcfd] border-2 border-[#f2dce4] rounded-2xl p-6 shadow-sm">
+      <div class="text-center pb-5 border-b border-dashed border-[#dca9ba]">
+       <div class="w-16 h-16 rounded-2xl border border-[#f2dce4] p-1 mx-auto mb-2 bg-white flex items-center justify-center overflow-hidden">
+        <img src="img/NAILS (1).png" alt="Logo" class="w-full h-full object-cover rounded-xl" onerror="this.remove();">
+       </div>
+       <h2 class="display-font font-bold text-2xl text-[#442a35]">Nails by Briseida</h2>
+       <p class="text-xs text-[#a9466c] font-semibold tracking-wider uppercase mt-0.5">Comprobante de Servicio</p>
+       <p id="invoice-date" class="text-xs text-[#8c566a] mt-2"></p>
+      </div>
+
+      <div class="py-4 border-b border-dashed border-[#dca9ba]">
+       <p class="text-xs font-bold uppercase text-[#a9466c] tracking-wider mb-3">Detalle del Presupuesto</p>
+       <div id="invoice-items-list" class="space-y-2.5 text-sm"></div>
+      </div>
+
+      <div class="pt-4 flex items-baseline justify-between">
+       <span class="display-font font-bold text-lg text-[#442a35]">TOTAL A PAGAR</span>
+       <span id="invoice-modal-total" class="text-2xl font-bold text-[#a9466c]">$0</span>
+      </div>
+
+      <div class="mt-6 text-center pt-4 border-t border-[#f5dde6]">
+       <p class="text-xs text-[#8c566a] font-medium">¡Muchas gracias por confiar en Nails by Briseida. Nos vemos en la próxima cita! ❤️</p>
+      </div>
+     </div>
+    </div>
+
+    <div class="p-5 bg-[#fffafd] border-t border-[#f2dce4] flex flex-col sm:flex-row justify-end gap-3">
+     <button id="close-invoice-button" type="button" class="w-full sm:w-auto bg-[#fde6ee] text-[#a9466c] rounded-full px-6 py-3 font-semibold hover:bg-[#f6cddd] transition">
+      Cerrar
+     </button>
+     <button id="download-png-button" type="button" class="w-full sm:w-auto bg-[#a9466c] text-white rounded-full px-6 py-3 font-semibold hover:bg-[#8f365a] transition inline-flex items-center justify-center gap-2">
+      <i data-lucide="download" class="w-4 h-4"></i>
+      <span>Descargar PNG</span>
+     </button>
+    </div>
+   </div>
+  </div>
+
+  <script src="script.js"></script>
+ </body>
+</html>
